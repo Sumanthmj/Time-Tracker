@@ -11,7 +11,7 @@ module.exports = {
         Tasks.data.push(task);
         return task;
     },
-    updateTask: (task) => {
+    updateTask: (task) => { 
         const index = Tasks.data.findIndex(element => element.id === task.id);
         if(index != -1) {
             Tasks.data[index] = task;
