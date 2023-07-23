@@ -1,0 +1,72 @@
+<!-- Layout -->
+<div class="layout">
+    <!-- Header -->
+    <div class="timer-header">
+        <div class="header-wrapper">
+            <img src="https://open-frontend-bucket.s3.amazonaws.com/interviews/001/logo.png" style="height: 40px;">
+            <span>Total Time Spend  <b>{{totalTimeSpend}} hr</b> </span>
+        </div>
+    </div>
+    <!-- Body -->
+    <div class="timer-body">
+        <!-- Container of a templates -->
+        <div class="time-container">
+            <ng-container *ngFor="let timer of tasks;let i = index">
+                <!-- Template -->
+                <div class="timer-template">
+                    <!-- Template header -->
+                    <div class="template-header">
+                        <div class="timer-label">
+                            <h1>{{timer.label}}</h1>
+                        </div>
+                        <div class="timer-action">
+                            <div>
+                                <span class="timer">{{format(timer?.hours)}}:{{format(timer?.minutes)}}:{{format(timer?.seconds)}}</span>
+                            </div>
+                            <div>
+                                <button class="timer-actions-button" [attr.action]="timer.action" (click)="changeAction(i)">{{timer.action}}</button>
+                                <button class="timer-delete-button" (click)="deleteTask(timer.id)"><img src="assets/images/cancel.svg" alt=""></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Template history -->
+                    <div>
+                        <div><label>History</label></div>
+                        <ng-container *ngIf="!!timer.history && timer.history.length > 0; else hideHistory">
+                            <div *ngFor="let history of timer.history">
+                                <span>
+                                    Started the timer at {{history.start | date: 'dd/MM/yyyy hh:mm'}} 
+                                    <ng-container *ngIf="!!history.end; else hideEndDate">
+                                        & Stopped at {{history.end | date: 'dd/MM/yyyy hh:mm'}}
+                                    </ng-container>
+                                    <ng-template #hideEndDate>
+                                        (Active)
+                                    </ng-template>
+                                </span>
+                            </div>
+                        </ng-container>
+                        <ng-template #hideHistory>
+                            <span>No History Found, Click on the start button to track the timer</span>
+                        </ng-template>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+        <!-- Add button bellow templates & bottom of the layout -->
+        <div class="footer-wrapper">
+            <button class="timer-add-button" id="addButton" (click)="openModal()"><img src="assets/images/plus.svg" alt=""></button>
+        </div>
+    </div>
+    <!-- Pop-Up dialog to add task -->
+    <dialog class="modal" id="modal">
+        <div class="close">
+            <button class="close-button" (click)="closeModal()"><img src="assets/images/cancel.svg" alt=""></button>
+        </div>
+        <span>Enter the Task Name</span>
+        <input id="taskName" type="text" value="" name="name">
+        <button class="timer-save-button" (click)="addTask()">{{'Save'}}</button>
+    </dialog>
+</div>
