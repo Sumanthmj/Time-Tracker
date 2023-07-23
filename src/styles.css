@@ -1,0 +1,83 @@
+/* You can add global styles to this file, and also import other style files */
+  /*
+    1. color palets.
+  */
+  :root {
+    --header-background: #ffffff;
+    --body-background: #F2F6F8;
+    --primary-color: #5056ED;
+    --warn-color: #ED5050;
+    --dark-gray: #8080805e;
+    --base-text-color: rgba(0, 0, 0, 0.9);
+    --history-text-color:  rgba(0, 0, 0, 0.8);
+    --card-box-shadow: rgba(0, 0, 0, 0.1);
+  }
+/*
+  2. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  /*
+    3. Remove default margin
+  */
+  * {
+    margin: 0;
+  }
+  /*
+    4. Allow percentage-based heights in the application
+  */
+  html, body {
+    height: 100%;
+  }
+  /*
+    Typographic tweaks!
+    5. Add accessible line-height
+    6. Improve text rendering
+  */
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-family: sans-serif;
+  }
+  /*
+    7. Remove built-in form typography styles
+  */
+  input, button, textarea, select {
+    font-family: sans-serif;
+  }
+
+  button {
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--base-text-color);
+  }
+
+  label {
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--base-text-color);
+  }
+
+  span {
+    font-family: sans-serif;
+    font-size: 16px;
+    color: var(--history-text-color);
+  }
+  /*
+    8. Avoid text overflows
+  */
+  p, h1 {
+    overflow-wrap: break-word;
+    font-size:  20px;
+    color: var(--base-text-color);
+    font-family: sans-serif;
+  }
+  /*
+    9. Create a root stacking context
+  */
+  #root, #__next {
+    isolation: isolate;
+  }

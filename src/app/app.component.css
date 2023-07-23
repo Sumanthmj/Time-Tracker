@@ -1,0 +1,201 @@
+.layout {
+    width: 100%;
+    height: 100%;
+}
+
+.timer-header {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10%;
+    background-color: var(--header-background);
+    position: fixed;
+    z-index: 1;
+}
+
+.header-wrapper {
+    display: flex;
+    margin: auto;
+    width: 1000px;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.timer-body {
+    min-height: 100%;
+    background-color: var(--body-background);
+    padding-top: 4%;
+}
+
+.time-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 1000px;
+    height: 90%;
+}
+
+.timer-template {
+    margin-top: 25px;
+    width: 100%;
+    border-radius: 25px;
+    height: auto;
+    background-color: var(--header-background);
+    padding: 14px;
+    box-shadow: 5px 5px 8px var(--card-box-shadow);
+}
+
+.timer-actions-button {
+    border-radius: 50px;
+    height: 40px;
+    padding: 0px 48px;
+    background-color: var(--primary-color);
+    color: var(--header-background);
+    border: none;
+    cursor: pointer;
+    &:hover {
+        box-shadow: .5px .5px .5px .5px var(--primary-color);
+    }
+}
+
+.timer-actions-button[action = 'Stop'] {
+    background-color: var(--warn-color);
+    &:hover {
+        box-shadow: .5px .5px .5px .5px var(--warn-color);
+    }
+}
+
+.timer-delete-button {
+    margin-left: 10px;
+    border-radius: 50px;
+    height: 35px; 
+    width: 35px; 
+    background-color: var(--dark-gray);
+    color: var(--base-text-color);
+    border: none;
+    cursor: pointer;
+    &:hover {
+        box-shadow: .5px .5px .5px .5px var(--dark-gray);
+    }
+}
+
+.timer-add-button {
+    margin-left: 10px;
+    border-radius: 50px;
+    height: 35px; 
+    width: 35px; 
+    background-color: var(--primary-color);
+    color: var(--header-background);
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+    &:hover {
+        box-shadow: .5px .5px .5px .5px var(--primary-color);
+    }
+}
+
+.timer-action {
+    width: 35%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+}
+
+.template-header {
+    display: flex; 
+    align-items: center;
+}
+
+.timer-label {
+    width: 65%
+}
+
+span[class = 'timer']::before {
+    content: '';
+    margin-right: 10px;
+    border-left: 3px solid var(--dark-gray);
+    height: 40px;
+}
+
+.footer {
+    height: 60px;
+    background: transparent;
+    position: fixed;
+    top: 90%;
+    left: 0;
+    right: 0;
+}
+
+.footer-wrapper {
+    height: 100%;
+    width: 1000px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin: auto;
+}
+
+.modal {
+    height: 32%;
+    width: 30%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--header-background);
+    border-radius: 25px;
+    padding: 30px;
+    border: none;
+    box-shadow: 5px 5px 8px var(--card-box-shadow);
+}
+
+.modal::backdrop {
+    background: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.timer-save-button {
+    border-radius: 50px;
+    height: 40px;
+    width: 100px;
+    background-color: var(--primary-color);
+    color: var(--header-background);
+    border: none;
+    cursor: pointer;
+    margin-top: 25px;
+    &:hover {
+        box-shadow: .5px .5px .5px .5px var(--primary-color);
+    }
+}
+
+input[type = 'text'] {
+    display: block;
+    border-color: var(--history-text-color);
+    font-size:  16px;
+    border-radius: 6px;
+    width: 100%;
+    height: 40px;
+}
+
+.close {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.close-button {
+    border: none;
+    background: none;
+    font-size: 12px;
+    height: 25px;
+    width: 25px;
+    &:hover {
+        border-radius: 50%;
+        background-color: var(--body-background);
+        cursor: pointer;
+    }
+}
+
+img {
+    margin-top: 4px;
+}
