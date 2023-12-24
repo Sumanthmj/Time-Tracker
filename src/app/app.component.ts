@@ -8,7 +8,17 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  tasks: Timer[] = [];
+  tasks: Timer[] = [
+    {
+      id: 0,
+      label: 'Yogasana',
+      action: 'Start',
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+      history: []
+    }
+  ];
   totalTimeSpend: number = 0;
   totalHours: number = 0;
   totalMinutes: number = 0;
