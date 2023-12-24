@@ -1,12 +1,12 @@
 export class Timer {
-    id: number | null = 0;
+    id: number;
     label: string = '';
     action: string = 'Start';
     hours: number = 0;
     minutes: number = 0;
     seconds: number = 0;
     history: Time[] = [];
-    constructor(id: number | null = 0, label: string = '', history: any[] = [], action = 'Start') {
+    constructor(id: number, label: string = '', history: any[] = [], action = 'Start') {
         this.id = id;
         this.label = label;
         if(history.length > 0) {
