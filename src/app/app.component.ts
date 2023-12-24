@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   totalMinutes: number = 0;
   totalSeconds: number = 0;
   timerIds: any[] = [];
-  apiSubscription!: Subscription;
+  apiSubscription!: Subscription; 
 
   constructor() {}
 
@@ -183,12 +183,15 @@ export class AppComponent implements OnInit {
     Delete task from list
   */
   deleteTask(id: number | null) {
-    if(id != null && id != undefined || id != '') {
+    console.log(id);
+    if(!!id || id === 0) {
       // const params = {
       //   id: id
       // }
+      console.log(id)
 
       const index = this.tasks.findIndex(element => element.id === id);
+      console.log("index", index);
       this.tasks.splice(index, 1);
       this.getTotalTimeSpend();
       // this.apiSubscription = this.timerService.delete(params).subscribe(
@@ -223,7 +226,7 @@ export class AppComponent implements OnInit {
     const input = document.getElementById('taskName') as HTMLInputElement;
     if(!!input.value) {
       let id = this.tasks.find((object) => object.id === Math.max(...this.tasks.map((object) => object.id)))?.id;
-      id = !!id ? id + 1: 0;
+      id = !!id || id === 0 ? id + 1: 0;
       let task = new Timer(id, input.value);
       this.tasks.push(task);
       input.value = '';
