@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Timer } from './models/timer.model';
-import { TimerService } from './service/timer.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -17,58 +16,58 @@ export class AppComponent implements OnInit {
   timerIds: any[] = [];
   apiSubscription!: Subscription;
 
-  constructor(private timerService: TimerService) {}
+  constructor() {}
 
   /*
     Get data from mock server
   */
   ngOnInit(): void {
-    this.apiSubscription = this.timerService.getData().subscribe(
-      (response) => {
-        const data = response;
-        if (Array.isArray(data)) {
-          this.tasks = data.map((element, index) => {
-            let task = new Timer(element.id, element.label, element.history);
-            if (!!task.history[0]?.end) {
-              this.timerIds.push({
-                [index]: 0,
-              });
-            } else {
-              if (task.history[0]?.start) {
-                const { hours, minutes, seconds } = this.getTimeDiff(
-                  task.history[0].start,
-                  new Date()
-                );
-                task.hours = hours;
-                task.minutes = minutes;
-                task.seconds = seconds;
-                task.action = 'Stop';
-                this.timerIds.push({
-                  [index]: setInterval(() => {
-                    task.seconds++;
-                    if (task.seconds > 59) {
-                      task.minutes++;
-                      task.seconds = 0;
-                    }
-                    if (task.minutes > 59) {
-                      task.hours++;
-                      task.minutes = 0;
-                      this.getTotalTimeSpend();
-                    }
-                  }, 1000),
-                });
-              }
-            }
-            return task;
-          });
-          this.getTotalTimeSpend();
-          this.apiSubscription.unsubscribe();
-        }
-      },
-      (error) => {
-        alert(error.error);
-      }
-    )
+    // this.apiSubscription = this.timerService.getData().subscribe(
+    //   (response) => {
+    //     const data = response;
+    //     if (Array.isArray(data)) {
+    //       this.tasks = data.map((element, index) => {
+    //         let task = new Timer(element.id, element.label, element.history);
+    //         if (!!task.history[0]?.end) {
+    //           this.timerIds.push({
+    //             [index]: 0,
+    //           });
+    //         } else {
+    //           if (task.history[0]?.start) {
+    //             const { hours, minutes, seconds } = this.getTimeDiff(
+    //               task.history[0].start,
+    //               new Date()
+    //             );
+    //             task.hours = hours;
+    //             task.minutes = minutes;
+    //             task.seconds = seconds;
+    //             task.action = 'Stop';
+    //             this.timerIds.push({
+    //               [index]: setInterval(() => {
+    //                 task.seconds++;
+    //                 if (task.seconds > 59) {
+    //                   task.minutes++;
+    //                   task.seconds = 0;
+    //                 }
+    //                 if (task.minutes > 59) {
+    //                   task.hours++;
+    //                   task.minutes = 0;
+    //                   this.getTotalTimeSpend();
+    //                 }
+    //               }, 1000),
+    //             });
+    //           }
+    //         }
+    //         return task;
+    //       });
+    //       this.apiSubscription.unsubscribe();
+    //     }
+    //   },
+    //   (error) => {
+    //     alert(error.error);
+    //   }
+    // )
+    this.getTotalTimeSpend();
   }
 
   /*
@@ -121,40 +120,52 @@ export class AppComponent implements OnInit {
           start: new Date()
         }
       )
-      this.apiSubscription = this.timerService.update(task).subscribe(
-        (response) => {
-          this.tasks[index] = response as Timer;
-          this.timerIds[index] = setInterval(() => {
-            this.tasks[index].seconds++;
-            if (this.tasks[index].seconds > 59) {
-              this.tasks[index].minutes++;
-              this.tasks[index].seconds = 0;
-            }
-            if (this.tasks[index].minutes > 59) {
-              this.tasks[index].hours++;
-              this.tasks[index].minutes = 0;
-            }
-          }, 1000);
-          this.apiSubscription.unsubscribe()
-        },
-        (error) => {
-          alert(error.error);
+      // this.apiSubscription = this.timerService.update(task).subscribe(
+      //   (response) => {
+      //     // this.tasks[index] = response as Timer;
+      //     // this.timerIds[index] = setInterval(() => {
+      //     //   this.tasks[index].seconds++;
+      //     //   if (this.tasks[index].seconds > 59) {
+      //     //     this.tasks[index].minutes++;
+      //     //     this.tasks[index].seconds = 0;
+      //     //   }
+      //     //   if (this.tasks[index].minutes > 59) {
+      //     //     this.tasks[index].hours++;
+      //     //     this.tasks[index].minutes = 0;
+      //     //   }
+      //     // }, 1000);
+      //     this.apiSubscription.unsubscribe()
+      //   },
+      //   (error) => {
+      //     alert(error.error);
+      //   }
+      // )
+      this.tasks[index] = task as Timer;
+      this.timerIds[index] = setInterval(() => {
+        this.tasks[index].seconds++;
+        if (this.tasks[index].seconds > 59) {
+          this.tasks[index].minutes++;
+          this.tasks[index].seconds = 0;
         }
-      )
+        if (this.tasks[index].minutes > 59) {
+          this.tasks[index].hours++;
+          this.tasks[index].minutes = 0;
+        }
+      }, 1000);
     } else {
       task.history[0].end = new Date();
       task = new Timer(task.id, task.label, task.history);
-      this.apiSubscription = this.timerService.update(task).subscribe(
-        (response) => {
-          this.tasks[index] = response as Timer;
-          clearInterval(this.timerIds[index]);
-          this.getTotalTimeSpend();
-          this.apiSubscription.unsubscribe();
-        },
-        (error) => {
-          alert(error.error);
-        }
-      )
+      this.tasks[index] = task as Timer;
+      clearInterval(this.timerIds[index]);
+      this.getTotalTimeSpend();
+      // this.apiSubscription = this.timerService.update(task).subscribe(
+      //   (response) => {
+      //     this.apiSubscription.unsubscribe();
+      //   },
+      //   (error) => {
+      //     alert(error.error);
+      //   }
+      // )
     }
   }
 
@@ -163,20 +174,21 @@ export class AppComponent implements OnInit {
   */
   deleteTask(id: number | null) {
     if(id != null && id != undefined || id != '') {
-      const params = {
-        id: id
-      }
-      this.apiSubscription = this.timerService.delete(params).subscribe(
-        (response) => {
-          const index = this.tasks.findIndex(element => element.id === +(response as any).id);
-          this.tasks.splice(index, 1);
-          this.getTotalTimeSpend();
-          this.apiSubscription.unsubscribe();
-        },
-        (error) => {
-          alert(error.error);
-        }
-      )
+      // const params = {
+      //   id: id
+      // }
+
+      const index = this.tasks.findIndex(element => element.id === id);
+      this.tasks.splice(index, 1);
+      this.getTotalTimeSpend();
+      // this.apiSubscription = this.timerService.delete(params).subscribe(
+      //   (response) => {
+      //     this.apiSubscription.unsubscribe();
+      //   },
+      //   (error) => {
+      //     alert(error.error);
+      //   }
+      // )
     }
   }
 
@@ -200,17 +212,19 @@ export class AppComponent implements OnInit {
   addTask() {
     const input = document.getElementById('taskName') as HTMLInputElement;
     if(!!input.value) {
-      let task = new Timer(null, input.value);
-      this.apiSubscription = this.timerService.add(task).subscribe(
-        (response) => {
-          this.tasks.push(response as Timer);
-          input.value = '';
-          this.apiSubscription.unsubscribe();
-        },
-        (error) => {
-          alert(error.error);
-        }
-      )
+      let id = this.tasks.find((object) => object.id === Math.max(...this.tasks.map((object) => object.id)))?.id;
+      id = !!id ? id + 1: 0;
+      let task = new Timer(id, input.value);
+      this.tasks.push(task);
+      input.value = '';
+      // this.apiSubscription = this.timerService.add(task).subscribe(
+      //   (response) => {
+      //     this.apiSubscription.unsubscribe();
+      //   },
+      //   (error) => {
+      //     alert(error.error);
+      //   }
+      // )
     }
     this.closeModal();
   }
