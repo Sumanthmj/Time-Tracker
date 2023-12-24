@@ -44,16 +44,18 @@
     color: var(--header-background);
     border: none;
     cursor: pointer;
-    &:hover {
-        box-shadow: .5px .5px .5px .5px var(--primary-color);
-    }
+}
+
+.timer-actions-button:hover {
+    box-shadow: .5px .5px .5px .5px var(--primary-color);
 }
 
 .timer-actions-button[action = 'Stop'] {
     background-color: var(--warn-color);
-    &:hover {
-        box-shadow: .5px .5px .5px .5px var(--warn-color);
-    }
+}
+
+.timer-actions-button[action = 'Stop']:hover {
+    box-shadow: .5px .5px .5px .5px var(--warn-color);
 }
 
 .mobile-view-time-spent {
@@ -73,9 +75,10 @@
     color: var(--base-text-color);
     border: none;
     cursor: pointer;
-    &:hover {
-        box-shadow: .5px .5px .5px .5px var(--dark-gray);
-    }
+}
+
+.timer-delete-button:hover {
+    box-shadow: .5px .5px .5px .5px var(--dark-gray);
 }
 
 .timer-add-button {
@@ -88,9 +91,10 @@
     border: none;
     cursor: pointer;
     z-index: 1;
-    &:hover {
-        box-shadow: .5px .5px .5px .5px var(--primary-color);
-    }
+}
+
+.timer-add-button:hover {
+    box-shadow: .5px .5px .5px .5px var(--primary-color);
 }
 
 .timer-action {
@@ -162,9 +166,10 @@ span[class = 'timer']::before {
     border: none;
     cursor: pointer;
     margin-top: 25px;
-    &:hover {
-        box-shadow: .5px .5px .5px .5px var(--primary-color);
-    }
+}
+
+.timer-save-button:hover {
+    box-shadow: .5px .5px .5px .5px var(--primary-color);
 }
 
 input[type = 'text'] {
@@ -187,11 +192,12 @@ input[type = 'text'] {
     font-size: 12px;
     height: 25px;
     width: 25px;
-    &:hover {
-        border-radius: 50%;
-        background-color: var(--body-background);
-        cursor: pointer;
-    }
+}
+
+.close-button:hover {
+    border-radius: 50%;
+    background-color: var(--body-background);
+    cursor: pointer;
 }
 
 img {
@@ -224,15 +230,18 @@ img {
         text-align: center; 
         border-radius: 20px; 
         color: var(--header-background);
-        &:hover {
-            box-shadow: .5px .5px .5px .5px green;
-        }
-        &[action = 'Stop'] {
-            background-color: var(--primary-color);
-            &:hover {
-                box-shadow: .5px .5px .5px .5px var(--primary-color);
-            }
-        }
+    }
+
+    .mobile-view-action-button:hover {
+        box-shadow: .5px .5px .5px .5px green;
+    }
+
+    .mobile-view-action-button[action = 'Stop'] {
+        background-color: var(--primary-color);
+    }
+
+    .mobile-view-action-button[action = 'Stop']:hover {
+        box-shadow: .5px .5px .5px .5px var(--primary-color);
     }
 
     .mobile-view-delete-button {
